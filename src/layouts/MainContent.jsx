@@ -2,10 +2,13 @@ import { Outlet } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 
-const DefaultLayout = () => {
+const MainContent = () => {
     return (
         <>
-            <NavBar />
+            <header>
+                <NavBar />
+            </header>
+
             <main className="container">
                 <Outlet />
             </main>
@@ -13,4 +16,4 @@ const DefaultLayout = () => {
     )
 }
 
-export default DefaultLayout
+export default MainContent
