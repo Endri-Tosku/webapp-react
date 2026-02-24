@@ -1,12 +1,15 @@
-const MovieReviewCard = () => {
+const MovieReviewCard = (props) => {
+
+    const { text, vote, name } = props.reviewProp;
+
     return (
         <div className="card mb-4">
             <div className="card-body">
                 <p className="card-text">
-                    testo della review
+                    {text}
                 </p>
-                <strong>Vote: 5</strong>
-                <address><i>By autore della review</i></address>
+                <strong>Vote: {vote}</strong>
+                <address><i>{name}</i></address>
             </div>
         </div>
     )
