@@ -1,3 +1,5 @@
+import MovieCard from "../components/MovieCard"
+
 const HomePage = () => {
     return (
         <section className="py-5">
@@ -10,12 +12,16 @@ const HomePage = () => {
                 </div>
 
                 {/* Griglia film */}
-                <div className="row g-4">
-                    <div className="col-12">
-                        <div className="p-5 bg-light text-center rounded">
-                            <h5 className="mb-0">Qui verranno mostrati i film</h5>
-                        </div>
-                    </div>
+                <div className="d-flex row row-cols-3 mt-4 justify-content-between container">
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
                 </div>
             </div>
         </section>

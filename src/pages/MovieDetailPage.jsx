@@ -1,31 +1,33 @@
+import { Link } from "react-router-dom"
+
+// import componente per il listato delle reviews
+import MovieReviewCard from "../components/MovieReviewCard"
+
 const MovieDetailPage = () => {
     return (
-        <section className="py-5">
-            <div className="container">
-
-                <div className="row justify-content-center">
-
-                    {/* colonna immagine */}
-                    <div className="col-md-4 mb-4">
-                        <div className="bg-light rounded d-flex align-items-center justify-content-center">
-                            <span className="text-muted">Poster film</span>
-                        </div>
-                    </div>
-
-                    {/* colonna dettagli */}
-                    <div className="col-md-6">
-                        <h1 className="fw-bold mb-3">Titolo del Film</h1>
-                        <p className="text-muted">
-                            Qui andrà la descrizione del film.
-                        </p>
-
-                        <button className="btn btn-outline-primary mt-3">
-                            Torna alla Home
-                        </button>
-                    </div>
+        <>
+            <header id="film" className="border-bottom border-1 mb-3">
+                <div className="d-flex mb-3">
+                    <img className="img-fluid" src="https://www.jdandj.com/uploads/8/0/0/8/80083458/s611371146998849390_p82_i2_w1600.jpeg" alt="titolo del libro" />
                 </div>
-            </div>
-        </section>
+                <h1>Titolo film</h1>
+                <h3 className="text-muted"><i>By Nome autore</i></h3>
+                <p>lorem ipsm dolor sit amet</p>
+            </header>
+            <section id="reviews">
+                <header className="d-flex justify-content-between align-items-center mb-4">
+                    <h4>Our community reviews</h4>
+                </header>
+                {/* Reviews qui */}
+                <MovieReviewCard />
+                <MovieReviewCard />
+                <MovieReviewCard />
+                <MovieReviewCard />
+            </section>
+            <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
+                <Link className="btn btn-secondary" to="/">Back to home</Link>
+            </footer>
+        </>
     )
 }
 
