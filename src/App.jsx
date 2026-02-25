@@ -1,6 +1,8 @@
 // importiamo le pages
 import HomePage from "./pages/HomePage"
 import MovieDetailPage from "./pages/MovieDetailPage"
+import NotFoundPage from "./pages/NotFoundPage"
+
 // importiamo il MainContent
 import MainContent from "./layouts/MainContent"
 
@@ -16,6 +18,7 @@ function App() {
         <Route element={<MainContent />}>
           <Route index element={<HomePage />} />
           <Route path="/film/:id" element={<MovieDetailPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

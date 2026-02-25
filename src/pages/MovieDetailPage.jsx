@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 // import dell'axios
 import axios from "axios"
@@ -20,6 +20,9 @@ const MovieDetailPage = () => {
     // settiamo la var di stato per il libro
     const [film, setFilm] = useState({});
 
+    // creiamo istanza del navigate per poterlo utilizzare
+    const redirect = useNavigate();
+
     const titleToImage = {
         "The Godfather": "the_godfather.jpg",
         "Interstellar": "interstellar.jpg",
@@ -37,6 +40,7 @@ const MovieDetailPage = () => {
             })
             .catch(err => {
                 console.log(err);
+                if (err.status = 404) redirect('/404');
             });
     }, [id]);
 
