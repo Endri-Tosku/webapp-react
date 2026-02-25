@@ -9,6 +9,9 @@ import { useState, useEffect } from "react"
 // import componente per il listato delle reviews
 import MovieReviewCard from "../components/MovieReviewCard"
 
+// import componente per form review
+import ReviewForm from "../components/ReviewForm";
+
 // endpoint
 const endpoint = "http://localhost:3000/api/movies/"
 
@@ -40,7 +43,7 @@ const MovieDetailPage = () => {
             })
             .catch(err => {
                 console.log(err);
-                if (err.status = 404) redirect('/404');
+                if (err.response?.status === 404) redirect('/404');
             });
     }, [id]);
 
@@ -70,9 +73,16 @@ const MovieDetailPage = () => {
                 {/* Reviews qui */}
                 {rederReviews()}
             </section>
+
+            <section>
+                <ReviewForm movie_id={film.id} />
+            </section>
+
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
                 <Link className="btn btn-secondary" to="/">Back to home</Link>
             </footer>
+
+
         </>
     )
 }
