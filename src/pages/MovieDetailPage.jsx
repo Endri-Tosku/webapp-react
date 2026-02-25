@@ -20,22 +20,31 @@ const MovieDetailPage = () => {
     // settiamo la var di stato per il libro
     const [film, setFilm] = useState({});
 
+    const titleToImage = {
+        "The Godfather": "the_godfather.jpg",
+        "Interstellar": "interstellar.jpg",
+        "Titanic": "titanic.jpg",
+        "The Matrix": "matrix.jpg",
+        "Inception": "inception.jpg"
+    };
+
     useEffect(() => {
         axios.get(endpoint + id)
             .then(res => {
-                setFilm(res.data);
+                const film = res.data;
+                film.image = `http://localhost:3000/images/movies_cover/${titleToImage[film.title]}`;
+                setFilm(film);
             })
             .catch(err => {
                 console.log(err);
             });
-
     }, [id]);
 
     // funzione di rendering del listato dei film
     const rederReviews = () => {
         return film.reviews?.map(review => {
             return (
-                <MovieReviewCard reviewProp={review} key={review.id} />
+                <MovieReviewCard key={review.id} reviewProp={review} />
             )
         })
     }
