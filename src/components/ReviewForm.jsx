@@ -3,7 +3,7 @@ import { useState } from "react"
 
 const ReviewForm = (props) => {
 
-    const { movie_id } = props;
+    const { movie_id, reloadReviews } = props;
 
     // creiamo stringa di ref all'endpoint del BE
     const endpoint = `http://localhost:3000/api/movies/${movie_id}/reviews`;
@@ -32,7 +32,12 @@ const ReviewForm = (props) => {
         e.preventDefault();
         // gestisci la chiamata in post all'endpoint in axios
         axios.post(endpoint, formData, { headers: { 'Content-Type': 'application/json' } })
-            .then(() => { setFormData(initialFormData) })
+            .then(() => {
+                // svuota campi form (e var di stato)
+                setFormData(initialFormData)
+                // ri-esegui funzione di chiamata su page padre
+                reloadReviews();
+            })
             .catch((err) => {
                 console.log(err);
             })

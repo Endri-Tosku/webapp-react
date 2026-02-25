@@ -34,7 +34,7 @@ const MovieDetailPage = () => {
         "Inception": "inception.jpg"
     };
 
-    useEffect(() => {
+    const fetchFilm = () => {
         axios.get(endpoint + id)
             .then(res => {
                 const film = res.data;
@@ -45,6 +45,9 @@ const MovieDetailPage = () => {
                 console.log(err);
                 if (err.response?.status === 404) redirect('/404');
             });
+    }
+    useEffect(() => {
+        fetchFilm();
     }, [id]);
 
     // funzione di rendering del listato dei film
@@ -75,7 +78,7 @@ const MovieDetailPage = () => {
             </section>
 
             <section>
-                <ReviewForm movie_id={film.id} />
+                <ReviewForm movie_id={film.id} reloadReviews={fetchFilm} />
             </section>
 
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
