@@ -7,30 +7,44 @@ import { useState, useEffect } from "react"
 // importa componente per listato
 import MovieCard from "../components/MovieCard"
 
+// import hook custom del contesto globale
+import { useGlobal } from "../contexts/GlobalContext";
+
 // endpoint
 const endpoint = "http://localhost:3000/api/movies"
 
 const HomePage = () => {
+
+    // attivo l'utilizzo del/dei valore/i messi a disposizione del contesto globale
+    const { setIsLoading } = useGlobal();
 
     // impostiamo variabile di stato
     const [films, setFilms] = useState([]);
 
     // funzione che gestisce la chimata index
     const fetchFilms = () => {
+
+        setIsLoading(true);
+
         axios.get(endpoint)
-            .then(res => { setFilms(res.data); })
-            .catch(err => { console.log(err); })
+            .then(res => {
+                setFilms(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     // funzione di rendering del listato dei film
     const renderFilm = () => {
-        return films.map(film => {
-            return (
-                <div className="col" key={film.id}>
-                    <MovieCard filmProp={film} />
-                </div>
-            )
-        })
+        return films.map(film => (
+            <div className="col" key={film.id}>
+                <MovieCard filmProp={film} />
+            </div>
+        ));
     }
 
     // richiamo funzione di fetch

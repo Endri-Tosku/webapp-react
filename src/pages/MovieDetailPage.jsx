@@ -12,10 +12,16 @@ import MovieReviewCard from "../components/MovieReviewCard"
 // import componente per form review
 import ReviewForm from "../components/ReviewForm";
 
+// import hook custom del contesto globale
+import { useGlobal } from "../contexts/GlobalContext";
+
 // endpoint
 const endpoint = "http://localhost:3000/api/movies/"
 
 const MovieDetailPage = () => {
+
+    // attivo l'utilizzo del/dei valore/i messi a disposizione del contesto globale
+    const { setIsLoading } = useGlobal();
 
     // prendiamo id libro da url rotta
     const { id } = useParams();
@@ -35,6 +41,10 @@ const MovieDetailPage = () => {
     };
 
     const fetchFilm = () => {
+
+        // parte la chimata cambio var stato context di conseguenza
+        setIsLoading(true);
+
         axios.get(endpoint + id)
             .then(res => {
                 const film = res.data;
@@ -44,7 +54,12 @@ const MovieDetailPage = () => {
             .catch(err => {
                 console.log(err);
                 if (err.response?.status === 404) redirect('/404');
+            })
+
+            .finally(() => {
+                setIsLoading(false);
             });
+
     }
     useEffect(() => {
         fetchFilm();
